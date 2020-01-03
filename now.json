@@ -1,0 +1,6 @@
+{
+  "env": {
+    "NATURAL_LANGUAGE_UNDERSTANDING_APIKEY": "@apikey",
+    "NATURAL_LANGUAGE_UNDERSTANDING_URL": "@url"
+  }
+}
