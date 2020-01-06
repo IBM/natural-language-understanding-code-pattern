@@ -1,0 +1,17 @@
+.bx--data-table-container {
+  min-width: 10rem;
+}
+
+.emotion-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  .emotion {
+    margin-right: 0.5rem;
+    padding-left: $spacing-03;
+    padding-right: $spacing-03;
+    display: flex;
+    width: 100%;
+  }
+}

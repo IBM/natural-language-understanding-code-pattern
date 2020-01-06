@@ -1,33 +1,73 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import {
-  CodeSnippet,
   CodeSnippetSkeleton,
   Tile,
+  FormGroup,
+  Dropdown,
 } from 'carbon-components-react';
 
-// <TabsSkeleton>
+import {
+  Categories,
+  Concepts,
+  Emotion,
+  Entities,
+  Keywords,
+  Sentiment,
+  Syntax,
+  SemanticRoles,
+} from '../Features';
 
-export const OutputContainer = ({ results, isAnalyzing }) => {
-  const renderResults = results => {
+const features = {
+  sentiment: Sentiment,
+  syntax: Syntax,
+  semantic_roles: SemanticRoles,
+  keywords: Keywords,
+  entities: Entities,
+  emotion: Emotion,
+  concepts: Concepts,
+  categories: Categories,
+};
+
+export const OutputContainer = ({ isAnalyzing, results }) => {
+  const [selectedFeature, setSelectedFeature] = useState('keywords');
+
+  const onSelectedFeatureChange = ({ selectedItem }) => {
+    setSelectedFeature(selectedItem);
+  };
+
+  const renderResults = (isAnalyzing, results) => {
     if (isAnalyzing) {
       return <CodeSnippetSkeleton type="multi" />;
     }
-    if (results) {
-      return (
-        <CodeSnippet type="multi">
-          {JSON.stringify(results, null, 2)}
-        </CodeSnippet>
-      );
+
+    if (!results) {
+      return null;
     }
-    return null;
+
+    const Feature = features[selectedFeature];
+    return (
+      <>
+        <FormGroup legendText="Features">
+          <Dropdown
+            disabled={!results}
+            items={Object.keys(features)}
+            selectedItem={selectedFeature}
+            onChange={onSelectedFeatureChange}
+          />
+        </FormGroup>
+        <FormGroup legendText="Result">
+          <Feature result={results[selectedFeature]} />
+        </FormGroup>
+      </>
+    );
   };
 
   return (
     <Tile className="output-container">
       <h3 className="container-title">Output</h3>
-      {renderResults(results)}
+      {renderResults(isAnalyzing, results)}
     </Tile>
   );
 };
