@@ -6,7 +6,10 @@ import {
   Tile,
   FormGroup,
   Dropdown,
+  ContentSwitcher,
+  Switch,
 } from 'carbon-components-react';
+import ReactJson from 'react-json-view';
 
 import {
   Categories,
@@ -16,23 +19,27 @@ import {
   Keywords,
   Sentiment,
   Syntax,
-  SemanticRoles,
+  //SemanticRoles,
 } from '../Features';
 
 const features = {
+  //semantic_roles: SemanticRoles,
+  categories: Categories,
+  concepts: Concepts,
+  emotion: Emotion,
+  entities: Entities,
+  keywords: Keywords,
   sentiment: Sentiment,
   syntax: Syntax,
-  semantic_roles: SemanticRoles,
-  keywords: Keywords,
-  entities: Entities,
-  emotion: Emotion,
-  concepts: Concepts,
-  categories: Categories,
 };
 
 export const OutputContainer = ({ isAnalyzing, results }) => {
   const [selectedFeature, setSelectedFeature] = useState('keywords');
+  const [outputType, setOutputType] = useState('table');
 
+  const onOutputTypeChange = e => {
+    setOutputType(e.name);
+  };
   const onSelectedFeatureChange = ({ selectedItem }) => {
     setSelectedFeature(selectedItem);
   };
@@ -49,16 +56,42 @@ export const OutputContainer = ({ isAnalyzing, results }) => {
     const Feature = features[selectedFeature];
     return (
       <>
-        <FormGroup legendText="Features">
+        <FormGroup legendText="Feature">
           <Dropdown
+            id="feature-dropdown"
+            label="Features"
             disabled={!results}
             items={Object.keys(features)}
             selectedItem={selectedFeature}
             onChange={onSelectedFeatureChange}
           />
         </FormGroup>
+        {results && (
+          <FormGroup legendText="">
+            <ContentSwitcher onChange={onOutputTypeChange}>
+              <Switch
+                name="table"
+                text="Table"
+                selected={outputType === 'table'}
+              />
+              <Switch
+                name="json"
+                text="JSON"
+                selected={outputType === 'json'}
+              />
+            </ContentSwitcher>
+          </FormGroup>
+        )}
         <FormGroup legendText="Result">
-          <Feature result={results[selectedFeature]} />
+          {outputType === 'table' ? (
+            <Feature result={results[selectedFeature]} />
+          ) : (
+            <ReactJson
+              name={false}
+              style={{ lineHeight: '1.3em' }}
+              src={results[selectedFeature]}
+            />
+          )}
         </FormGroup>
       </>
     );

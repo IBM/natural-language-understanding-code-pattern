@@ -1,0 +1,8 @@
+---
+applications:
+  - name: natural-language-understanding-code-pattern
+    buildpacks:
+      - sdk-for-nodejs
+    path: .
+    command: npm run start-prod
+    memory: 512M

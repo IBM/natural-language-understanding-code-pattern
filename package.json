@@ -1,44 +1,69 @@
 {
-  "name": "nlu-pattern",
-  "version": "0.0.1",
-  "description": "",
-  "main": "server.js",
-  "scripts": {
-    "dev": "node server.js",
-    "build": "next build",
-    "start": "cross-env NODE_ENV=production node server.js",
-    "test": "jest"
-  },
-  "jest": {
-    "preset": "jest-puppeteer"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "MIT",
+  "name": "@ibm-watson/nlu-code-pattern",
+  "version": "0.1.0",
+  "proxy": "http://localhost:5000",
+  "private": true,
   "dependencies": {
-    "@carbon/icons-react": "^10.6.1",
-    "@carbon/themes": "^10.9.0",
-    "@zeit/next-sass": "^1.0.1",
     "body-parser": "^1.19.0",
-    "carbon-components": "^10.7.4",
-    "carbon-components-react": "^7.7.4",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-rate-limit": "^5.0.0",
+    "express-secure-only": "^0.2.1",
+    "helmet": "^3.21.2",
     "ibm-watson": "^5.2.1",
-    "isomorphic-fetch": "^2.2.1",
-    "next": "^9.1.6",
-    "node-sass": "^4.13.0",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "morgan": "^1.9.1"
+  },
+  "scripts": {
+    "start": "node scripts/start.js",
+    "start-prod": "node server.js",
+    "build": "react-scripts build",
+    "test": "npm run test:components && npm run test:integrations",
+    "test:components": "react-scripts test --env=jsdom",
+    "test:integration": "jest test -c test/jest.config.js"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "engines": {
+    "node": ">=12.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   },
   "devDependencies": {
-    "cross-env": "^6.0.3",
-    "eslint": "^6.8.0",
-    "eslint-plugin-jest": "^23.1.1",
-    "eslint-plugin-react": "^7.17.0",
-    "eslint-plugin-react-hooks": "^2.3.0",
+    "@carbon/themes": "^10.9.0",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.4.0",
+    "@testing-library/user-event": "^7.2.1",
+    "carbon-components": "^10.9.0",
+    "carbon-components-react": "^7.9.0",
+    "carbon-icons": "^7.0.7",
+    "carbon-themes": "^1.7.0",
     "jest": "^24.9.0",
     "jest-puppeteer": "^4.4.0",
-    "puppeteer": "^2.0.0"
+    "node-sass": "^4.13.0",
+    "nodemon": "^2.0.2",
+    "prettier": "^1.19.1",
+    "puppeteer": "^2.0.0",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-json-tree": "^0.11.2",
+    "react-json-view": "^1.19.1",
+    "react-scripts": "3.3.0"
+  },
+  "prettier": {
+    "trailingComma": "all",
+    "tabWidth": 2,
+    "semi": true,
+    "singleQuote": true
   }
 }
