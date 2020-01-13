@@ -98,7 +98,7 @@ Copy the credential file to the application folder.
 1. Run the application
 
    ```
-   npm start
+   npm run dev
    ```
 
 1. View the application in a browser at `localhost:3000`
