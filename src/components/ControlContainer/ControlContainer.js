@@ -8,7 +8,19 @@ import {
   ContentSwitcher,
   Switch,
 } from 'carbon-components-react';
+import isURL from 'validator/lib/isURL';
+
 import defaultInputs from '../../data/input.json';
+
+const validateInput = (type, { url, text }) => {
+  if (type === 'text' && text.length === 0) {
+    return 'Text is required';
+  }
+  if (type === 'url' && !isURL(url)) {
+    return 'A valid URL is required';
+  }
+  return null;
+};
 
 export const ControlContainer = ({ isAnalyzing, onAnalyzeCall }) => {
   const [inputType, setInputType] = useState('text');
@@ -20,32 +32,35 @@ export const ControlContainer = ({ isAnalyzing, onAnalyzeCall }) => {
   };
 
   const onInputChange = e => {
-    console.log(e);
     if (inputType === 'url') {
       setUrl(e.target.value);
     } else {
       setText(e.target.value);
     }
   };
-
+  let invalidInputMessage = validateInput(inputType, { text, url });
   return (
     <Tile className="control-container">
       <h3 className="container-title">
         Analyze a news article or other content
       </h3>
-      <FormGroup legendText="">
-        <ContentSwitcher onChange={onInputTypeChange}>
+      <div className="input-switch">
+        <ContentSwitcher
+          className="input-switch__type"
+          onChange={onInputTypeChange}
+        >
           <Switch name="text" text="Text" selected={inputType === 'text'} />
           <Switch name="url" text="URL" selected={inputType === 'url'} />
         </ContentSwitcher>
-      </FormGroup>
+      </div>
       <FormGroup legendText={`${inputType.toUpperCase()} to analyze`}>
         <TextArea
           id="custom-input"
           labelText="label"
           onChange={onInputChange}
           placeholder={`Type the ${inputType.toUpperCase()} to analyze...`}
-          invalidText={`Invalid ${inputType.toUpperCase()}`}
+          invalid={!!invalidInputMessage}
+          invalidText={invalidInputMessage}
           value={inputType === 'url' ? url : text}
           hideLabel
           light
@@ -54,7 +69,7 @@ export const ControlContainer = ({ isAnalyzing, onAnalyzeCall }) => {
       <FormGroup legendText="">
         <Button
           className="submit-button"
-          disabled={isAnalyzing}
+          disabled={isAnalyzing || !!invalidInputMessage}
           kind="primary"
           onClick={() => {
             onAnalyzeCall(inputType === 'url' ? { url } : { text });

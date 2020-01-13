@@ -16,6 +16,14 @@
     max-width: 60rem;
   }
 
+  .input-switch {
+    padding-bottom: $spacing-09;
+
+    &__type {
+      max-width: 10rem;
+    }
+  }
+
   .container-title {
     padding-bottom: $spacing-09;
   }

@@ -34,12 +34,21 @@ export const ServiceContainer = () => {
       .then(response => response.json())
       .then(data => {
         if (data.error) {
+          setResults(null);
           setError(data.error);
         } else {
           setResults(data);
         }
       })
-      .catch(err => setError({ title: err.message, description: err.message }))
+      .catch(err => {
+        setResults(null);
+        setError({
+          error: {
+            title: 'Internal Server Error',
+            description: err.message,
+          },
+        });
+      })
       .finally(() => setIsAnalyzing(false));
   };
 

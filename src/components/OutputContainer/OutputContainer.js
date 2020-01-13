@@ -67,8 +67,11 @@ export const OutputContainer = ({ isAnalyzing, results }) => {
           />
         </FormGroup>
         {results && (
-          <FormGroup legendText="">
-            <ContentSwitcher onChange={onOutputTypeChange}>
+          <div className="output-switch">
+            <ContentSwitcher
+              className="output-switch__type"
+              onChange={onOutputTypeChange}
+            >
               <Switch
                 name="table"
                 text="Table"
@@ -80,7 +83,7 @@ export const OutputContainer = ({ isAnalyzing, results }) => {
                 selected={outputType === 'json'}
               />
             </ContentSwitcher>
-          </FormGroup>
+          </div>
         )}
         <FormGroup legendText="Result">
           {outputType === 'table' ? (

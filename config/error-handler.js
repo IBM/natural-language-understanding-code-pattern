@@ -2,8 +2,9 @@ module.exports = app => {
   // catch 404 and forward to error handler
   app.use((req, res, next) => {
     const err = new Error('Not Found');
-    err.code = 404;
-    err.message = 'Not Found';
+    err.title = 'Page not found';
+    err.description = `The page ${req.path} was not found.`;
+    err.statusCode = 404;
     next(err);
   });
 
@@ -14,6 +15,6 @@ module.exports = app => {
       title: err.title || 'Internal Server Error',
       description: err.description || err.error || err.message,
     };
-    res.status(error.statusCode || 500).json(error);
+    res.status(err.statusCode || 500).json({ error });
   });
 };

@@ -22,17 +22,14 @@ app.post('/api/analyze', async (req, res, next) => {
   try {
     const { result } = await client.analyze(req.body);
     return res.json(result);
-  } catch (err) {
-    console.error(err);
+  } catch (error) {
     if (!client) {
-      const error = {
-        title: 'Invalid credentials',
-        description:
-          'Could not find valid credentials for the Natural Language Understanding service.',
-        statusCode: 401,
-      };
-      next(error);
+      error.statusCode = 401;
+      error.description =
+        'Could not find valid credentials for the Natural Language Understanding service.';
+      error.title = 'Invalid credentials';
     }
+    next(error);
   }
 });
 
