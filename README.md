@@ -105,6 +105,12 @@ Copy the credential file to the application folder.
 
 ## Deploying to IBM Cloud as a Cloud Foundry Application
 
+Click on the button below to deploy this demo to the IBM Cloud.
+
+[![Deploy to IBM Cloud](https://cloud.ibm.com/devops/setup/deploy/button.png)](https://cloud.ibm.com/devops/setup/deploy?repository=https://github.com/watson-developer-cloud/natural-language-understanding-code-pattern)
+
+### Manually
+
 1. Build the application
 
    ```
