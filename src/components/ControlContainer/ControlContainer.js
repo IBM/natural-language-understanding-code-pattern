@@ -12,7 +12,7 @@ import isURL from 'validator/lib/isURL';
 
 import defaultInputs from '../../data/input.json';
 
-const validateInput = (type, { url, text }) => {
+export const validateInput = (type, { url, text }) => {
   if (type === 'text' && text.length === 0) {
     return 'Text is required';
   }
@@ -41,12 +41,12 @@ export const ControlContainer = ({ isAnalyzing, onAnalyzeCall }) => {
   let invalidInputMessage = validateInput(inputType, { text, url });
   return (
     <Tile className="control-container">
-      <h3 className="container-title">
+      <h3 className="control-container__title">
         Analyze a news article or other content
       </h3>
-      <div className="input-switch">
+      <div className="control-container__control-panel">
         <ContentSwitcher
-          className="input-switch__type"
+          className="control-container__content-switch"
           onChange={onInputTypeChange}
         >
           <Switch name="text" text="Text" selected={inputType === 'text'} />
@@ -63,6 +63,7 @@ export const ControlContainer = ({ isAnalyzing, onAnalyzeCall }) => {
           invalidText={invalidInputMessage}
           value={inputType === 'url' ? url : text}
           hideLabel
+          rows={10}
           light
         />
       </FormGroup>

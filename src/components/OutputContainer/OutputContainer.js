@@ -61,36 +61,37 @@ export const OutputContainer = ({ isAnalyzing, results }) => {
             id="feature-dropdown"
             label="Features"
             disabled={!results}
+            light
             items={Object.keys(features)}
             selectedItem={selectedFeature}
             onChange={onSelectedFeatureChange}
           />
         </FormGroup>
-        {results && (
-          <div className="output-switch">
-            <ContentSwitcher
-              className="output-switch__type"
-              onChange={onOutputTypeChange}
-            >
-              <Switch
-                name="table"
-                text="Table"
-                selected={outputType === 'table'}
-              />
-              <Switch
-                name="json"
-                text="JSON"
-                selected={outputType === 'json'}
-              />
-            </ContentSwitcher>
-          </div>
-        )}
+        <div className="output-container__control-panel">
+          <ContentSwitcher
+            className="output-container__content-switch"
+            onChange={onOutputTypeChange}
+          >
+            <Switch
+              name="table"
+              text="Table"
+              selected={outputType === 'table'}
+            />
+            <Switch name="json" text="JSON" selected={outputType === 'json'} />
+          </ContentSwitcher>
+        </div>
         <FormGroup legendText="Result">
           {outputType === 'table' ? (
             <Feature result={results[selectedFeature]} />
           ) : (
             <ReactJson
               name={false}
+              enableClipboard={false}
+              displayDataTypes={false}
+              displayObjectSize={false}
+              collapsed={2}
+              collapseStringsAfterLength={20}
+              theme="monokai"
               style={{ lineHeight: '1.3em' }}
               src={results[selectedFeature]}
             />
@@ -102,7 +103,7 @@ export const OutputContainer = ({ isAnalyzing, results }) => {
 
   return (
     <Tile className="output-container">
-      <h3 className="container-title">Output</h3>
+      <h3 className="output-container__title">Output</h3>
       {renderResults(isAnalyzing, results)}
     </Tile>
   );

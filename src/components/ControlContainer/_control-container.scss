@@ -1,6 +1,7 @@
 @import './overrides.scss';
 
 .control-container {
+
   display: flex;
   flex-direction: column;
   margin-bottom: $spacing-07;
@@ -16,15 +17,15 @@
     max-width: 60rem;
   }
 
-  .input-switch {
+  &__title {
     padding-bottom: $spacing-09;
-
-    &__type {
-      max-width: 10rem;
-    }
   }
 
-  .container-title {
+  &__control-panel {
     padding-bottom: $spacing-09;
+  }
+
+  &__content-switch {
+    max-width: 10rem;
   }
 }
