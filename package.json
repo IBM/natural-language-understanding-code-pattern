@@ -18,7 +18,7 @@
     "start": "node server.js",
     "build": "react-scripts build",
     "test": "npm run test:components && npm run test:integrations",
-    "test:components": "react-scripts test --env=jsdom",
+    "test:components": "CI=true react-scripts test --env=jsdom",
     "test:integrations": "jest test -c test/jest.config.js"
   },
   "eslintConfig": {
