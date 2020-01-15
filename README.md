@@ -12,6 +12,16 @@
 
 Demo: https://natural-language-understanding-code-pattern.ng.bluemix.net/
 
+### Flow
+
+<p align="center">
+  <img alt="architecture" width="600" src="./public/architecture.png">
+</p>
+
+1. User sends messages to the application (running locally, in the IBM Cloud or in IBM Cloud Pak for Data.
+1. The application sends the user message to IBM Watson Natural Language Understanding service.
+1. Watson Natural Language Understanding processes the text or url and extract features such us keywords, concepts, categories. The service can be provisioned on either IBM Cloud or IBM Cloud Pak for Data.
+
 ## Prerequisites
 
 ### Public Cloud
