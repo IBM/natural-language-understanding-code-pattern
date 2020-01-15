@@ -9,7 +9,7 @@ import { renderTable } from './utils';
 
 export const Entities = ({ language, result }) => {
   if (!result || result.length === 0) {
-    return <p>{`No Entities returned for ${language} input.`}</p>;
+    return <p>{`No Entities returned for the input in language: ${language}.`}</p>;
   }
 
   const headers = [

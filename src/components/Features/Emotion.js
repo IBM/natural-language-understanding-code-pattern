@@ -8,7 +8,7 @@ import { renderTable } from './utils';
 
 export const Emotion = ({ language, result }) => {
   if (!result || !result.document) {
-    return <p>{`No Emotion results returned for ${language} input.`}</p>;
+    return <p>{`No Emotion results returned for the input in language: ${language}.`}</p>;
   }
 
   const { emotion } = result.document;

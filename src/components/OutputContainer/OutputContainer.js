@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import ISO6391 from 'iso-639-1';
 
 import {
   CodeSnippetSkeleton,
@@ -60,7 +61,6 @@ export const OutputContainer = ({ isAnalyzing, results }) => {
           <Dropdown
             id="feature-dropdown"
             label="Features"
-            disabled={!results}
             light
             items={Object.keys(features)}
             selectedItem={selectedFeature}
@@ -71,18 +71,18 @@ export const OutputContainer = ({ isAnalyzing, results }) => {
           <ContentSwitcher
             className="output-container__content-switch"
             onChange={onOutputTypeChange}
+            selectedIndex={outputType === 'table' ? 0 : 1}
           >
-            <Switch
-              name="table"
-              text="Table"
-              selected={outputType === 'table'}
-            />
-            <Switch name="json" text="JSON" selected={outputType === 'json'} />
+            <Switch name="table" text="Table" />
+            <Switch name="json" text="JSON" />
           </ContentSwitcher>
         </div>
         <FormGroup legendText="Result">
           {outputType === 'table' ? (
-            <Feature result={results[selectedFeature]} />
+            <Feature
+              result={results[selectedFeature]}
+              language={ISO6391.getName(results.language)}
+            />
           ) : (
             <ReactJson
               name={false}

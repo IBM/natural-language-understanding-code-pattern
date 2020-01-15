@@ -9,7 +9,7 @@ import { renderTable } from './utils';
 
 export const Categories = ({ language, result }) => {
   if (!result || result.length === 0) {
-    return <p>{`No Categories returned for ${language} input.`}</p>;
+    return <p>{`No Categories returned for the input in language: ${language}.`}</p>;
   }
 
   const headers = [

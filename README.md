@@ -41,9 +41,16 @@ Depending on where your service instance is you may have different ways to downl
 Copy the credential file to the application folder.
 
 **Cloud Pak for Data**
-![](https://watson-developer-cloud.github.io/images/credentials-cpd.png)
+
+<p align="center">
+  <img alt="CPD"  width="600" src="https://watson-developer-cloud.github.io/images/credentials-cpd.png">
+</p>
+
 **Public Cloud**
-![](https://watson-developer-cloud.github.io/images/credentials-public.png)
+
+<p align="center">
+  <img alt="public"  width="600" src="https://watson-developer-cloud.github.io/images/credentials-public.png">
+</p>
 
 ### Manually
 

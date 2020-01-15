@@ -8,7 +8,7 @@ import { renderTable } from './utils';
 
 export const Sentiment = ({ language, result }) => {
   if (!result || !result.document) {
-    return <p>{`No Sentiment results returned for ${language} input.`}</p>;
+    return <p>{`No Sentiment results returned for the input in language: ${language}.`}</p>;
   }
 
   const headers = [

@@ -8,7 +8,7 @@ import { renderTable } from './utils';
 
 export const Syntax = ({ language, result }) => {
   if (!result || !result.tokens) {
-    return <p>{`No Syntax returned for ${language} input.`}</p>;
+    return <p>{`No Syntax returned for the input in language: ${language}.`}</p>;
   }
 
   const headers = [

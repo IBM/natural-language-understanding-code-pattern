@@ -23,6 +23,7 @@ app.post('/api/analyze', async (req, res, next) => {
     const { result } = await client.analyze(req.body);
     return res.json(result);
   } catch (error) {
+    console.log(error);
     if (!client) {
       error.statusCode = 401;
       error.description =
