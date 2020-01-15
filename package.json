@@ -5,6 +5,7 @@
   "private": true,
   "dependencies": {
     "body-parser": "^1.19.0",
+    "cross-env": "^6.0.3",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-rate-limit": "^5.0.0",
@@ -15,11 +16,13 @@
     "morgan": "^1.9.1"
   },
   "scripts": {
-    "dev": "node scripts/start.js",
+    "dev": "concurrently \"npm:client\" \"npm:server\"",
+    "client": "react-scripts start",
+    "server": "nodemon server.js",
     "start": "node server.js",
     "build": "react-scripts build",
     "test": "npm run test:components && npm run test:integrations",
-    "test:components": "CI=true react-scripts test --env=jsdom",
+    "test:components": "cross-env CI=true react-scripts test --env=jsdom",
     "test:integrations": "jest test -c test/jest.config.js"
   },
   "eslintConfig": {
@@ -40,6 +43,17 @@
       "last 1 safari version"
     ]
   },
+  "lint-staged": {
+    "./**/*.{js,scss,html,png,yaml,yml}": [
+      "npm run build",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "devDependencies": {
     "@carbon/themes": "^10.9.0",
     "@testing-library/jest-dom": "^4.2.4",
@@ -48,8 +62,11 @@
     "carbon-components": "^10.9.0",
     "carbon-components-react": "^7.9.0",
     "carbon-icons": "^7.0.7",
+    "concurrently": "^5.0.2",
+    "husky": "^4.0.10",
     "jest": "^24.9.0",
     "jest-puppeteer": "^4.4.0",
+    "lint-staged": "^9.5.0",
     "node-sass": "^4.13.0",
     "nodemon": "^2.0.2",
     "prettier": "^1.19.1",
@@ -65,5 +82,22 @@
     "tabWidth": 2,
     "semi": true,
     "singleQuote": true
+  },
+  "nodemonConfig": {
+    "watch": [
+      "app.js",
+      "config/**/*.js",
+      "server.js"
+    ],
+    "ext": "js",
+    "ignore": [
+      ".git",
+      "node_modules",
+      "node_modules",
+      "public",
+      "src",
+      "test"
+    ],
+    "delay": 500
   }
 }
