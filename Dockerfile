@@ -18,11 +18,11 @@ RUN npm run test:components
 
 FROM base as release
 
-RUN npm install --only=prod
-
 COPY --from=build /app/build /app/build
 COPY --from=build /app/config /app/config
 COPY --from=build /app/*.js* /app/
+
+RUN npm install --only=prod
 
 EXPOSE 5000
 CMD ["npm", "start"]

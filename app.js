@@ -18,6 +18,10 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
+app.get('/health', (req, res) => {
+  res.json({ status: 'UP' });
+});
+
 app.post('/api/analyze', async (req, res, next) => {
   try {
     const { result } = await client.analyze(req.body);
