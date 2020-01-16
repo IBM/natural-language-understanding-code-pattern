@@ -7,6 +7,8 @@ require('./config/express')(app);
 let client;
 try {
   client = new NaturalLanguageUnderstandingV1({
+    // When running in Cloud Pak for Data with a custom certificate
+    disableSslVerification: true,
     // Remember to place the credentials in the .env file. Read the README.kd file!
     version: '2020-01-01',
   });
