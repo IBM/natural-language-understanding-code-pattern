@@ -18,7 +18,7 @@ Demo: https://natural-language-understanding-code-pattern.ng.bluemix.net/
   <img alt="architecture" width="600" src="./public/architecture.png">
 </p>
 
-1. User sends messages to the application (running locally, in the IBM Cloud or in IBM Cloud Pak for Data.
+1. User sends messages to the application (running locally, in the IBM Cloud or in IBM Cloud Pak for Data).
 1. The application sends the user message to IBM Watson Natural Language Understanding service.
 1. Watson Natural Language Understanding processes the text or url and extract features such us keywords, concepts, categories. The service can be provisioned on either IBM Cloud or IBM Cloud Pak for Data.
 
@@ -38,7 +38,7 @@ Demo: https://natural-language-understanding-code-pattern.ng.bluemix.net/
 
 ### Cloud Pak for Data
 
-To use this code pattern in a Cloud Pak for Data, you can use your cpd `username` and `password` credentials or an `access_token` to authenticate your requests. You also need the service `url` as described [here](https://cloud.ibm.com/apidocs/natural-language-understanding/natural-language-understanding-data#authentication).
+To use this code pattern with a Natural Language Classifier instance provisioned on Cloud Pak for Data, you can use your CPD `username` and `password` credentials or an `access_token` to authenticate your requests. You also need the service `url` as described [here](https://cloud.ibm.com/apidocs/natural-language-understanding/natural-language-understanding-data#authentication).
 
 ## Configuring the application
 
@@ -64,39 +64,39 @@ Copy the credential file to the application folder.
 
 ### Manually
 
-1. In the application folder, copy the _.env.example_ file and create a file called _.env_
+1.  In the application folder, copy the _.env.example_ file and create a file called _.env_
 
-   ```
-   cp .env.example .env
-   ```
+    ```
+    cp .env.example .env
+    ```
 
-2. Open the _.env_ file and add the service credentials depending on your environment.
+2.  Open the _.env_ file and add the service credentials depending on your environment.
 
-   Example _.env_ file that configures the `apikey` and `url` for a Natural Language Understanding service instance hosted in the US East region:
+    Example _.env_ file that configures the `apikey` and `url` for a Natural Language Understanding service instance hosted in the US East region:
 
-   ```
-   NATURAL_LANGUAGE_UNDERSTANDING_IAM_APIKEY=X4rbi8vwZmKpXfowaS3GAsA7vdy17Qh7km5D6EzKLHL2
-   NATURAL_LANGUAGE_UNDERSTANDING_URL=https://gateway-wdc.watsonplatform.net/natural-language-understanding/api
-   ```
+    ```
+    NATURAL_LANGUAGE_UNDERSTANDING_IAM_APIKEY=X4rbi8vwZmKpXfowaS3GAsA7vdy17Qh7km5D6EzKLHL2
+    NATURAL_LANGUAGE_UNDERSTANDING_URL=https://gateway-wdc.watsonplatform.net/natural-language-understanding/api
+    ```
 
-   - **CPD using username and password:** If your service instance is running in Cloud Pak for Data and you want to use `username` and `password` credentials, add the `NATURAL_LANGUAGE_UNDERSTANDING_USERNAME` and `NATURAL_LANGUAGE_UNDERSTANDING_PASSWORD` variables to the _.env_ file.
+    - **CPD using username and password:** If your service instance is running in Cloud Pak for Data and you want to use `username` and `password` credentials, add the `NATURAL_LANGUAGE_UNDERSTANDING_USERNAME` and `NATURAL_LANGUAGE_UNDERSTANDING_PASSWORD` variables to the _.env_ file.
 
-   Example _.env_ file that configures the `username`, `password`, and `url` for a Natural Language Understanding service instance:
+      Example _.env_ file that configures the `username`, `password`, and `url` for a Natural Language Understanding service instance:
 
-   ```
-   NATURAL_LANGUAGE_UNDERSTANDING_USERNAME=admin
-   NATURAL_LANGUAGE_UNDERSTANDING_PASSWORD=password
-   NATURAL_LANGUAGE_UNDERSTANDING_URL=https://my-cp4d-url.cloud.ibm.com/natural-language-understanding/api
-   NATURAL_LANGUAGE_UNDERSTANDING_AUTH_TYPE=cp4d
-   ```
+      ```
+      NATURAL_LANGUAGE_UNDERSTANDING_USERNAME=admin
+      NATURAL_LANGUAGE_UNDERSTANDING_PASSWORD=password
+      NATURAL_LANGUAGE_UNDERSTANDING_URL=https://my-cp4d-url.cloud.ibm.com/natural-language-understanding/api
+      NATURAL_LANGUAGE_UNDERSTANDING_AUTH_TYPE=cp4d
+      ```
 
-   - **CPD using access token:** If your service instance is running in Cloud Pak for Data and you want to use the `access_token` from the service instance detail page.
+    - **CPD using access token:** If your service instance is running in Cloud Pak for Data and you want to use the `access_token` from the service instance detail page.
 
-     ```
-     NATURAL_LANGUAGE_UNDERSTANDING_BEARER_TOKEN=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.ey...
-     NATURAL_LANGUAGE_UNDERSTANDING_URL=https://my-cp4d-url.cloud.ibm.com/natural-language-understanding/api
-     NATURAL_LANGUAGE_UNDERSTANDING_AUTH_TYPE=bearerToken
-     ```
+          ```
+          NATURAL_LANGUAGE_UNDERSTANDING_BEARER_TOKEN=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.ey...
+          NATURAL_LANGUAGE_UNDERSTANDING_URL=https://my-cp4d-url.cloud.ibm.com/natural-language-understanding/api
+          NATURAL_LANGUAGE_UNDERSTANDING_AUTH_TYPE=bearerToken
+          ```
 
 ## Running locally
 
@@ -159,13 +159,27 @@ Click on the button below to deploy this demo to the IBM Cloud.
 
 #### Unit tests
 
-Run unit tests with `npm run test-unit`, then `a` to run all tests. See the output for more info.
+Run unit tests with:
+
+```
+npm run test:components
+```
+
+See the output for more info.
 
 #### Integration tests
 
-First you have to make sure your code is built: `npm run build`
+First you have to make sure your code is built:
 
-Then run integration tests with: `npm run test-integration-runner`
+```
+npm run build
+```
+
+Then run integration tests with:
+
+```
+npm run test:integration
+```
 
 ## Directory structure
 
@@ -189,14 +203,6 @@ Then run integration tests with: `npm run test-integration-runner`
 
 This sample code is licensed under the [MIT License](https://opensource.org/licenses/MIT).
 
-## Contributing
-
-See [CONTRIBUTING](.github/CONTRIBUTING.md).
-
 ## Open Source @ IBM
 
 Find more open source projects on the [IBM Github Page](http://ibm.github.io/)
-
-[getting_started]: https://www.ibm.com/watson/developercloud/doc/common/index.html
-[docs]: http://www.ibm.com/watson/developercloud/doc/natural-language-understanding/index.html
-[sign_up]: https://console.ng.bluemix.net/registration/
