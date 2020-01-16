@@ -2,19 +2,6 @@
 jest.setTimeout(10000);
 
 describe('app', () => {
-  let server;
-
-  beforeAll(() => {
-    server = require('../server');
-  });
-
-  afterAll(done => {
-    server.close(() => {
-      console.log('shutting down server');
-      done();
-    });
-  });
-
   beforeEach(async () => {
     await page.goto('http://localhost:5000');
   });

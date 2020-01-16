@@ -21,9 +21,9 @@
     "server": "nodemon server.js",
     "start": "node server.js",
     "build": "react-scripts build",
-    "test": "npm run test:components && npm run test:integrations",
+    "test": "npm run test:components && npm run test:integration",
     "test:components": "cross-env CI=true react-scripts test --env=jsdom",
-    "test:integrations": "jest test -c test/jest.config.js"
+    "test:integration": "JEST_PUPPETEER_CONFIG='test/jest-puppeteer.config.js' jest test -c test/jest.config.js"
   },
   "eslintConfig": {
     "extends": "react-app"
