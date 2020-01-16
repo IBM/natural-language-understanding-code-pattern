@@ -86,17 +86,24 @@ Copy the credential file to the application folder.
       ```
       NATURAL_LANGUAGE_UNDERSTANDING_USERNAME=admin
       NATURAL_LANGUAGE_UNDERSTANDING_PASSWORD=password
-      NATURAL_LANGUAGE_UNDERSTANDING_URL=https://my-cp4d-url.cloud.ibm.com/natural-language-understanding/api
+      NATURAL_LANGUAGE_UNDERSTANDING_URL=https://{cpd-url}:{cpd-port}/natural-language-understanding/api
+
       NATURAL_LANGUAGE_UNDERSTANDING_AUTH_TYPE=cp4d
+      NATURAL_LANGUAGE_UNDERSTANDING_AUTH_URL=https://{cpd-url}:{cpd-port}/v1/preauth/validateAuth
+      NATURAL_LANGUAGE_UNDERSTANDING_AUTH_TYPE=cp4d
+
+      # Only needed if using a self-signed certificate
+      NATURAL_LANGUAGE_UNDERSTANDING_AUTH_DISABLE_SSL=true
+      NATURAL_LANGUAGE_UNDERSTANDING_DISABLE_SSL=true
       ```
 
     - **CPD using access token:** If your service instance is running in Cloud Pak for Data and you want to use the `access_token` from the service instance detail page.
 
-          ```
-          NATURAL_LANGUAGE_UNDERSTANDING_BEARER_TOKEN=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.ey...
-          NATURAL_LANGUAGE_UNDERSTANDING_URL=https://my-cp4d-url.cloud.ibm.com/natural-language-understanding/api
-          NATURAL_LANGUAGE_UNDERSTANDING_AUTH_TYPE=bearerToken
-          ```
+      ```
+      NATURAL_LANGUAGE_UNDERSTANDING_BEARER_TOKEN=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.ey...
+      NATURAL_LANGUAGE_UNDERSTANDING_URL=https://{cpd-url}:{cpd-port}/natural-language-understanding/api
+      NATURAL_LANGUAGE_UNDERSTANDING_AUTH_TYPE=bearerToken
+      ```
 
 ## Running locally
 
