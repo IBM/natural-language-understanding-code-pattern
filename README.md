@@ -131,7 +131,7 @@ The recommended approach is to download the credentials file and place it in the
    npm run dev
    ```
 
-1. View the application in a browser at `localhost:3000`
+1. View the application in a browser at `localhost:5000`
 
 ## Deploying to IBM Cloud as a Cloud Foundry Application
 
@@ -232,37 +232,14 @@ Depending on where you service instance is running you may have to provide diffe
 
 Create the template with the values from the previous step.
 
-```bash
-oc nlu-web-app -f openshift/template.yaml \
--p NATURAL_LANGUAGE_UNDERSTANDING_AUTH_TYPE=bearerToken
--p NATURAL_LANGUAGE_UNDERSTANDING_URL=<your service url> \
--p NATURAL_LANGUAGE_UNDERSTANDING_BEARER_TOKEN=<your bearer token> \
 ```
-
-For example, for Cloud pak for data and using a bearer token, the command would look like:
-
-```bash
-oc nlu-web-app -f openshift/template.yaml \
--p NATURAL_LANGUAGE_UNDERSTANDING_AUTH_TYPE=bearerToken
--p NATURAL_LANGUAGE_UNDERSTANDING_URL=https://{cpd-url}:{cpd-port}/natural-language-understanding/api \
--p NATURAL_LANGUAGE_UNDERSTANDING_BEARER_TOKEN=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.ey... \
-```
-
-> The CPD url https://{cpd-url}:{cpd-port} needs to be valid and accessible from where our openshift cluster is running.
-
-For public, it will look like:
-
-```bash
-oc nlu-web-app -f openshift/template.yaml \
--p NATURAL_LANGUAGE_UNDERSTANDING_AUTH_TYPE=iam
--p NATURAL_LANGUAGE_UNDERSTANDING_URL=https://api.us-east.natural-language-understanding.watson.cloud.ibm.com/ \
--p NATURAL_LANGUAGE_UNDERSTANDING_APIKEY=qEIkagermanBMbBG1Qo0FoEkgjbQf62t95PTp5pvoplnC \
+oc new-app -f openshift/template.yaml --ignore-unknown-parameters=true --param-file ./env
 ```
 
 Kick off a build once all required dependencies are confirmed
 
 ```bash
-oc nlu-web-app
+oc nlu-code-pattern
 ```
 
 #### Check the status
