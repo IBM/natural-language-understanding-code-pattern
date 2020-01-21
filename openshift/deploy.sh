@@ -1,0 +1,42 @@
+#!/bin/bash
+
+
+echo "Uploading openshift template..."
+
+
+CREDENTIALS_FILE=./ibm-credentials.env
+ENV_FILE=./.env
+
+if test -f "$CREDENTIALS_FILE"; then
+    echo "Loading parameters from: $CREDENTIALS_FILE"
+    source $CREDENTIALS_FILE
+fi
+
+if test -f "$ENV_FILE"; then
+    echo "LOADING parameters from: $ENV_FILE"
+    source $ENV_FILE
+fi
+
+APP_NAME=${1:-'nlu-web-app'}
+
+echo "$APP_NAME: Register template"
+oc $APP_NAME -f openshift/template.yaml \
+-p NATURAL_LANGUAGE_UNDERSTANDING_AUTH_TYPE=$NATURAL_LANGUAGE_UNDERSTANDING_AUTH_TYPE
+-p NATURAL_LANGUAGE_UNDERSTANDING_URL=$NATURAL_LANGUAGE_UNDERSTANDING_URL
+-p NATURAL_LANGUAGE_UNDERSTANDING_BEARER_TOKEN=$NATURAL_LANGUAGE_UNDERSTANDING_BEARER_TOKEN
+-p NATURAL_LANGUAGE_UNDERSTANDING_APIKEY=$NATURAL_LANGUAGE_UNDERSTANDING_APIKEY
+-p NATURAL_LANGUAGE_UNDERSTANDING_USERNAME=$NATURAL_LANGUAGE_UNDERSTANDING_USERNAME
+-p NATURAL_LANGUAGE_UNDERSTANDING_PASSWORD=$NATURAL_LANGUAGE_UNDERSTANDING_PASSWORD
+
+echo "$APP_NAME: Deploy template"
+oc $APP_NAME
+
+
+echo "$APP_NAME: Get status"
+oc status
+
+echo "$APP_NAME: Follow deployment"
+oc start-build nlu-code-pattern --follow
+
+echo "$APP_NAME: Display route"
+oc get routes
