@@ -62,7 +62,12 @@ Copy the credential file to the application folder.
   <img alt="public"  width="600" src="https://watson-developer-cloud.github.io/images/credentials-public.png">
 </p>
 
-### Manually
+### Manual deployment
+
+The recommended approach is to download the credentials file and place it in the directory where you code is. Follow the following steps only if you want to manually configure your authentication mechanism.
+
+<details>
+<summary>Configure the authentication manually</summary>
 
 1.  In the application folder, copy the _.env.example_ file and create a file called _.env_
 
@@ -76,7 +81,7 @@ Copy the credential file to the application folder.
 
     ```
     NATURAL_LANGUAGE_UNDERSTANDING_IAM_APIKEY=X4rbi8vwZmKpXfowaS3GAsA7vdy17Qh7km5D6EzKLHL2
-    NATURAL_LANGUAGE_UNDERSTANDING_URL=https://gateway-wdc.watsonplatform.net/natural-language-understanding/api
+    NATURAL_LANGUAGE_UNDERSTANDING_URL=https://api.us-east.natural-language-understanding.watson.cloud.ibm.com/
     ```
 
     - **CPD using username and password:** If your service instance is running in Cloud Pak for Data and you want to use `username` and `password` credentials, add the `NATURAL_LANGUAGE_UNDERSTANDING_USERNAME` and `NATURAL_LANGUAGE_UNDERSTANDING_PASSWORD` variables to the _.env_ file.
@@ -90,7 +95,6 @@ Copy the credential file to the application folder.
 
       NATURAL_LANGUAGE_UNDERSTANDING_AUTH_TYPE=cp4d
       NATURAL_LANGUAGE_UNDERSTANDING_AUTH_URL=https://{cpd-url}:{cpd-port}/v1/preauth/validateAuth
-      NATURAL_LANGUAGE_UNDERSTANDING_AUTH_TYPE=cp4d
 
       # Only needed if using a self-signed certificate
       NATURAL_LANGUAGE_UNDERSTANDING_AUTH_DISABLE_SSL=true
@@ -104,6 +108,8 @@ Copy the credential file to the application folder.
       NATURAL_LANGUAGE_UNDERSTANDING_URL=https://{cpd-url}:{cpd-port}/natural-language-understanding/api
       NATURAL_LANGUAGE_UNDERSTANDING_AUTH_TYPE=bearerToken
       ```
+
+</details>
 
 ## Running locally
 
@@ -162,6 +168,133 @@ Click on the button below to deploy this demo to the IBM Cloud.
 
 1. View the application online at the app URL, for example: https://my-app-name.mybluemix.net
 
+## Deploying to OpenShift
+
+This code pattern can be deployed to any OpenShift cluster or [Minishift](https://www.okd.io/minishift) running 3.2 or above.
+
+### Creating a project
+
+After logging in with `oc login`, ensure that you have a project set up. If not, create one as follows:
+
+```
+oc new-project nlu-project --display-name="NLU Code Pattern"
+```
+
+Ensure that your current project is set.
+
+```bash
+oc project nlu-project
+```
+
+### Automatic deployment
+
+Run the deploy.sh script:
+
+```
+sh openshift/deploy.sh
+```
+
+The script will run until the app is deployed and available.
+
+### Manual deployment
+
+<details>
+<summary>Manually deploy to openshift</summary>
+
+#### Prepare the required parameters
+
+The template for this example is located at [template.yaml](openshift/template.yaml).
+
+First, list the available parameters:
+
+```bash
+oc process --parameters -f openshift/template.yaml
+```
+
+The output will look like:
+
+```
+NAME                                          DESCRIPTION                                                                                               GENERATOR           VALUE
+APP_NAME                                      The name assigned to all of the frontend objects defined in this template.                                                    nlu-code-pattern
+NATURAL_LANGUAGE_UNDERSTANDING_AUTH_TYPE      How to authenticate with the NLU service, possible values are: iam, cp4d, bearerToken                                         bearerToken
+NATURAL_LANGUAGE_UNDERSTANDING_BEARER_URL     The service URL.
+NATURAL_LANGUAGE_UNDERSTANDING_BEARER_TOKEN   Cloud Pak for Data bearer token.
+NATURAL_LANGUAGE_UNDERSTANDING_APIKEY         IBM Cloud IAM apikey from the service instance page.
+NATURAL_LANGUAGE_UNDERSTANDING_USERNAME       Cloud Pak for Data username of user with access to the service instance.
+NATURAL_LANGUAGE_UNDERSTANDING_PASSWORD       Cloud Pak for Data password of user with access to the service instance.
+NAMESPACE                                     The OpenShift Namespace where the ImageStream resides.                                                                        openshift
+APPLICATION_DOMAIN                            The exposed hostname that will route to the Node.js service, if left blank a value will be defaulted.                         nlu-code-pattern
+SOURCE_REPOSITORY_URL                         The URL of the repository with your application source code.                                                                  https://github.com/watson-developer-cloud/natural-language-understanding-code-pattern
+SOURCE_REPOSITORY_REF                         Set this to a branch name, tag or other ref of your repository if you are not using the default branch.
+```
+
+Depending on where your service instance is running you may have to provide different parameters to this application. Follow the [instructions](#manual-deployment) on how to run the application locally and create the `.env` file with the service credentials. The same values will be used when deploying to OpenShift.
+
+Create the template with the values from the previous step.
+
+```
+oc new-app -f openshift/template.yaml --ignore-unknown-parameters=true --param-file ./env
+```
+
+#### Check the status
+
+To check the status of the application run:
+
+```bash
+oc status
+```
+
+Which should return something like:
+
+```
+In project NLU Code Pattern Project (nlu-project) on server https://10.2.2.2:8443
+
+  svc/nlu-code-pattern - 172.30.108.183:8080
+  dc/nlu-code-pattern deploys istag/nlu-code-pattern:latest <-
+    bc/nlu-code-pattern source builds https://... on openshift/nodejs:12
+      build #1 running for 7 seconds
+    deployment #1 waiting on image or update
+```
+
+#### Custom Routing
+
+An OpenShift route exposes a service at a host name, like www.example.com, so that external clients can reach it by name.
+
+DNS resolution for a host name is handled separately from routing; you may wish to configure a cloud domain that will always correctly resolve to the OpenShift router, or if using an unrelated host name you may need to modify its DNS records independently to resolve to the router.
+
+That aside, let's explore our new web app. `oc new-app` created a new route. To view your new route:
+
+```
+oc get route
+```
+
+In the result you can find all routes in your project and for each route you can find its hostname.
+Find the `nlu-code-pattern` route and use the hostname to navigate to the newly created Node.js web app.
+Notice that you can use the `APPLICATION_DOMAIN` template parameter to define a hostname for your app.
+
+#### Optional diagnostics
+
+If the build is not yet started (you can check by running `oc get builds`), start one and stream the logs with:
+
+```
+oc start-build nlu-code-pattern --follow
+```
+
+Deployment happens automatically once the new application image is available. To monitor its status either watch the web console or execute `oc get pods` to see when the pod is up. Another helpful command is
+
+```
+oc get svc
+```
+
+This will help indicate what IP address the service is running, the default port for it to deploy at is 8080. Output should look like:
+
+```
+NAME              CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
+nlu-code-pattern  172.30.249.251   <none>        8080/TCP   7m
+```
+
+</details>
+
 ## Tests
 
 #### Unit tests
@@ -198,6 +331,7 @@ npm run test:integration
 │   ├── express.js
 │   └── security.js
 ├── package.json
+├── openshift                   // openshift template
 ├── public                      // static resources
 ├── server.js                   // entry point
 ├── test                        // integration tests

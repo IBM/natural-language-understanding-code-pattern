@@ -1,0 +1,235 @@
+---
+apiVersion: v1
+kind: Template
+labels:
+  app: nlu-code-pattern
+  template: nlu-code-pattern
+message: |-
+  The ${APP_NAME} service has been created in your project.
+
+  For more information about using this quickstart see https://github.com/watson-developer-cloud/natural-language-understanding-code-pattern/tree/master.
+metadata:
+  annotations:
+    description: 'An example Node.js application demonstrating the Watson Natural Language Understanding API. For more information about using this template see https://github.com/watson-developer-cloud/natural-language-understanding-code-pattern/tree/master/.'
+    iconClass: icon-nodejs
+    openshift.io/display-name: Natural Language Understanding Code Pattern
+    openshift.io/documentation-url: https://github.com/watson-developer-cloud/natural-language-understanding-code-pattern/tree/master
+    openshift.io/provider-display-name: IBM
+    tags: quickstart,nodejs,watson,natural-language-understanding,code-pattern
+  name: nlu-code-pattern
+objects:
+  - apiVersion: v1
+    kind: Service
+    metadata:
+      name: '${APP_NAME}'
+    spec:
+      ports:
+        - name: web
+          port: 5000
+          targetPort: 5000
+      selector:
+        name: '${APP_NAME}'
+  - apiVersion: v1
+    kind: Route
+    metadata:
+      name: '${APP_NAME}'
+    spec:
+      host: '${APPLICATION_DOMAIN}'
+      to:
+        kind: Service
+        name: '${APP_NAME}'
+  - apiVersion: v1
+    kind: ImageStream
+    metadata:
+      annotations:
+        description: Keeps track of changes in the application image
+      name: '${APP_NAME}'
+  - apiVersion: v1
+    kind: BuildConfig
+    metadata:
+      annotations:
+        description: Defines how to build the application
+        template.alpha.openshift.io/wait-for-ready: 'true'
+      name: '${APP_NAME}'
+    spec:
+      source:
+        type: Git
+        git:
+          uri: '${SOURCE_REPOSITORY_URL}'
+          ref: '${SOURCE_REPOSITORY_REF}'
+        contextDir: '${CONTEXT_DIR}'
+      strategy:
+        type: Source
+        sourceStrategy:
+          from:
+            kind: DockerImage
+            name: docker.io/centos/nodejs-12-centos7:latest
+          env:
+            - name: NPM_MIRROR
+              value: '${NPM_MIRROR}'
+      output:
+        to:
+          kind: ImageStreamTag
+          name: '${APP_NAME}:latest'
+      triggers:
+        - type: ImageChange
+        - type: ConfigChange
+        - type: GitHub
+          github:
+            secret: '${GITHUB_WEBHOOK_SECRET}'
+        - type: Generic
+          generic:
+            secret: '${GENERIC_WEBHOOK_SECRET}'
+  - apiVersion: v1
+    kind: DeploymentConfig
+    metadata:
+      annotations:
+        description: Defines how to deploy the application server
+        template.alpha.openshift.io/wait-for-ready: 'true'
+      name: '${APP_NAME}'
+    spec:
+      replicas: 1
+      selector:
+        name: '${APP_NAME}'
+      strategy:
+        type: Rolling
+      template:
+        metadata:
+          labels:
+            name: '${APP_NAME}'
+          name: '${APP_NAME}'
+        spec:
+          containers:
+            - name: nlu-code-pattern
+              image: ' '
+              ports:
+                - containerPort: 5000
+              env:
+                - name: NATURAL_LANGUAGE_UNDERSTANDING_BEARER_TOKEN
+                  value: '${NATURAL_LANGUAGE_UNDERSTANDING_BEARER_TOKEN}'
+                - name: NATURAL_LANGUAGE_UNDERSTANDING_URL
+                  value: '${NATURAL_LANGUAGE_UNDERSTANDING_URL}'
+                - name: NATURAL_LANGUAGE_UNDERSTANDING_AUTH_TYPE
+                  value: '${NATURAL_LANGUAGE_UNDERSTANDING_AUTH_TYPE}'
+                - name: NATURAL_LANGUAGE_UNDERSTANDING_APIKEY
+                  value: '${NATURAL_LANGUAGE_UNDERSTANDING_APIKEY}'
+                - name: NATURAL_LANGUAGE_UNDERSTANDING_USERNAME
+                  value: '${NATURAL_LANGUAGE_UNDERSTANDING_USERNAME}'
+                - name: NATURAL_LANGUAGE_UNDERSTANDING_PASSWORD
+                  value: '${NATURAL_LANGUAGE_UNDERSTANDING_PASSWORD}'
+                - name: NATURAL_LANGUAGE_UNDERSTANDING_AUTH_URL
+                  value: '${NATURAL_LANGUAGE_UNDERSTANDING_AUTH_URL}'
+                - name: NATURAL_LANGUAGE_UNDERSTANDING_AUTH_DISABLE_SSL
+                  value: 'true'
+                - name: NATURAL_LANGUAGE_UNDERSTANDING_DISABLE_SSL
+                  value: 'true'
+              livenessProbe:
+                httpGet:
+                  path: '/health'
+                  port: 5000
+                initialDelaySeconds: 30
+                timeoutSeconds: 3
+              readinessProbe:
+                httpGet:
+                  path: '/health'
+                  port: 5000
+                initialDelaySeconds: 3
+                timeoutSeconds: 3
+              resources:
+                limits:
+                  memory: '256Mi'
+      triggers:
+        - imageChangeParams:
+            automatic: true
+            containerNames:
+              - nlu-code-pattern
+            from:
+              kind: ImageStreamTag
+              name: '${APP_NAME}:latest'
+          type: ImageChange
+        - type: ConfigChange
+parameters:
+  - description: The name assigned to all of the frontend objects defined in this template.
+    displayName: Name
+    name: APP_NAME
+    required: true
+    value: nlu-code-pattern
+
+  - displayName: Authorization type
+    description: 'How to authenticate with the NLU service, possible values are: iam, cp4d, bearerToken'
+    name: NATURAL_LANGUAGE_UNDERSTANDING_AUTH_TYPE
+    value: 'bearerToken'
+    required: true
+  - displayName: Service URL
+    description: The service URL.
+    name: NATURAL_LANGUAGE_UNDERSTANDING_URL
+    required: true
+
+  # Bearer Token
+  - displayName: Cloud Pak for Data bearer token
+    description: Cloud Pak for Data bearer token. Use when AUTH_TYPE is bearerToken
+    name: NATURAL_LANGUAGE_UNDERSTANDING_BEARER_TOKEN
+    required: false
+
+  # IAM
+  - displayName: IAM apikey
+    description: IBM Cloud IAM apikey from the service instance page. Use when AUTH_TYPE is iam
+    name: NATURAL_LANGUAGE_UNDERSTANDING_APIKEY
+    required: false
+
+  # CP4D
+  - displayName: Cloud Pak for Data username
+    description: Cloud Pak for Data username of user with access to the service instance.  Use when AUTH_TYPE is cp4d
+    name: NATURAL_LANGUAGE_UNDERSTANDING_USERNAME
+    required: false
+  - displayName: Cloud Pak for Data password
+    description: Cloud Pak for Data password of user with access to the service instance.  Use when AUTH_TYPE is cp4d
+    name: NATURAL_LANGUAGE_UNDERSTANDING_PASSWORD
+    required: false
+  - displayName: Authorization URL
+    description: The authorization URL. Use when AUTH_TYPE is cp4d
+    name: NATURAL_LANGUAGE_UNDERSTANDING_AUTH_URL
+    required: false
+
+  - description: The OpenShift Namespace where the ImageStream resides.
+    displayName: Namespace
+    name: NAMESPACE
+    required: true
+    value: openshift
+  - description:
+      The exposed hostname that will route to the Node.js service, if left
+      blank a value will be defaulted.
+    displayName: Application Hostname
+    name: APPLICATION_DOMAIN
+    value: 'nlu-code-pattern'
+  - name: SOURCE_REPOSITORY_URL
+    displayName: Git Repository URL
+    description: The URL of the repository with your application source code.
+    required: true
+    value: https://github.com/watson-developer-cloud/natural-language-understanding-code-pattern
+  - name: SOURCE_REPOSITORY_REF
+    displayName: Git Reference
+    description:
+      Set this to a branch name, tag or other ref of your repository if you
+      are not using the default branch.
+  - name: CONTEXT_DIR
+    displayName: Context Directory
+    description:
+      Set this to the relative path to your project if it is not in the root
+      of your repository.
+  - name: GITHUB_WEBHOOK_SECRET
+    displayName: GitHub Webhook Secret
+    description:
+      Github trigger secret.  A difficult to guess string encoded as part
+      of the webhook URL.  Not encrypted.
+    generate: expression
+    from: '[a-zA-Z0-9]{40}'
+  - name: GENERIC_WEBHOOK_SECRET
+    displayName: Generic Webhook Secret
+    description: A secret string used to configure the Generic webhook.
+    generate: expression
+    from: '[a-zA-Z0-9]{40}'
+  - name: NPM_MIRROR
+    displayName: Custom NPM Mirror URL
+    description: The custom NPM mirror URL
+    value: ''
