@@ -62,7 +62,7 @@ Copy the credential file to the application folder.
   <img alt="public"  width="600" src="https://watson-developer-cloud.github.io/images/credentials-public.png">
 </p>
 
-### Manually
+### Manual deployment
 
 The recommended approach is to download the credentials file and place it in the directory where you code is. Follow the following steps only if you want to manually configure your authentication mechanism.
 
@@ -131,7 +131,7 @@ The recommended approach is to download the credentials file and place it in the
    npm run dev
    ```
 
-1. View the application in a browser at `localhost:5000`
+1. View the application in a browser at `localhost:3000`
 
 ## Deploying to IBM Cloud as a Cloud Foundry Application
 
@@ -168,9 +168,9 @@ Click on the button below to deploy this demo to the IBM Cloud.
 
 1. View the application online at the app URL, for example: https://my-app-name.mybluemix.net
 
-## Deploying to Openshift
+## Deploying to OpenShift
 
-This code pattern can be deployed to any openshift cluster or [minishift](https://www.okd.io/minishift) running 3.2 or above.
+This code pattern can be deployed to any OpenShift cluster or [Minishift](https://www.okd.io/minishift) running 3.2 or above.
 
 ### Creating a project
 
@@ -186,7 +186,7 @@ Ensure that your current project is set.
 oc project nlu-project
 ```
 
-### Automatic
+### Automatic deployment
 
 Run the deploy.sh script:
 
@@ -196,12 +196,12 @@ sh openshift/deploy.sh
 
 The script will run until the app is deployed and available.
 
-### Manually
+### Manual deployment
 
 <details>
 <summary>Manually deploy to openshift</summary>
 
-### Prepare the required parameters
+#### Prepare the required parameters
 
 The template for this example is located at [template.yaml](openshift/template.yaml).
 
@@ -228,18 +228,12 @@ SOURCE_REPOSITORY_URL                         The URL of the repository with you
 SOURCE_REPOSITORY_REF                         Set this to a branch name, tag or other ref of your repository if you are not using the default branch.
 ```
 
-Depending on where you service instance is running you may have to provide different parameters to this application. Follow the [instructions](#manually) on how to run the application locally and create the `.env` file with the service credentials. The same values will be used when deploying to openshift.
+Depending on where your service instance is running you may have to provide different parameters to this application. Follow the [instructions](#manual-deployment) on how to run the application locally and create the `.env` file with the service credentials. The same values will be used when deploying to OpenShift.
 
 Create the template with the values from the previous step.
 
 ```
 oc new-app -f openshift/template.yaml --ignore-unknown-parameters=true --param-file ./env
-```
-
-Kick off a build once all required dependencies are confirmed
-
-```bash
-oc nlu-code-pattern
 ```
 
 #### Check the status
