@@ -4,6 +4,19 @@ const express = require('express');
 const app = express();
 require('./config/express')(app);
 
+// For starter kit env.
+require('dotenv').config({
+  silent: true
+});
+const pEnv = process.env;
+
+if (pEnv.service_watson_natural_language_understanding && !pEnv.VCAP_SERVICES && !pEnv.NATURAL_LANGUAGE_UNDERSTANDING_APIKEY && !pEnv.NATURAL_LANGUAGE_UNDERSTANDING_URL && !pEnv.NATURAL_LANGUAGE_UNDERSTANDING_USERNAME) {
+  // If we don't have the expected environment variables, use the starter kit apikey and url.
+  let skitJson = JSON.parse(pEnv.service_watson_natural_language_understanding);
+  process.env.NATURAL_LANGUAGE_UNDERSTANDING_APIKEY = skitJson.apikey;
+  process.env.NATURAL_LANGUAGE_UNDERSTANDING_URL = skitJson.url;
+}
+
 let client;
 try {
   client = new NaturalLanguageUnderstandingV1({
