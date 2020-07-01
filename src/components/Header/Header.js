@@ -54,7 +54,7 @@ Header.defaultProps = {
       key="github-link"
       target="_blank"
       rel="noopener noreferrer"
-      href="https://github.com/watson-developer-cloud/natural-language-understanding-code-pattern"
+      href="https://github.com/IBM/natural-language-understanding-code-pattern"
     >
       <p className="link-text">GitHub</p>
       <LogoGithub24 className="link-icon" />
