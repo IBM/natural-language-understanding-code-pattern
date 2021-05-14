@@ -29,7 +29,7 @@
     "extends": "react-app"
   },
   "engines": {
-    "node": "12.20.2"
+    "node": "14.x"
   },
   "browserslist": {
     "production": [
