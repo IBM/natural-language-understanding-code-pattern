@@ -23,7 +23,8 @@
     "build": "INLINE_RUNTIME_CHUNK=false react-scripts build",
     "test": "npm run test:components && npm run test:integration",
     "test:components": "cross-env CI=true react-scripts test --env=jsdom",
-    "test:integration": "JEST_PUPPETEER_CONFIG='test/jest-puppeteer.config.js' jest test -c test/jest.config.js"
+    "test:integration": "JEST_PUPPETEER_CONFIG='test/jest-puppeteer.config.js' jest test -c test/jest.config.js",
+    "prepare": "husky install"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -49,11 +50,6 @@
       "git add"
     ]
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "devDependencies": {
     "@carbon/themes": "^10.19.0",
     "@testing-library/jest-dom": "^5.13.0",
@@ -63,7 +59,7 @@
     "carbon-components-react": "^7.29.0",
     "carbon-icons": "^7.0.7",
     "concurrently": "^6.2.0",
-    "husky": "^4.3.0",
+    "husky": "^6.0.0",
     "jest": "^24.9.0",
     "jest-puppeteer": "^4.4.0",
     "lint-staged": "^11.0.0",
