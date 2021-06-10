@@ -10,7 +10,7 @@
     "express": "^4.17.1",
     "express-rate-limit": "^5.2.6",
     "express-secure-only": "^0.2.1",
-    "helmet": "^4.1.1",
+    "helmet": "^4.6.0",
     "ibm-watson": "^6.1.1",
     "iso-639-1": "^2.1.9",
     "morgan": "^1.10.0"
