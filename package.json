@@ -70,7 +70,7 @@
     "react": "^16.14.0",
     "react-dom": "^16.13.1",
     "react-json-view": "^1.19.1",
-    "react-scripts": "3.4.3",
+    "react-scripts": "4.0.3",
     "validator": "^13.1.17"
   },
   "prettier": {
