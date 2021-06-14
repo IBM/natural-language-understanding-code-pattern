@@ -51,7 +51,7 @@
     ]
   },
   "devDependencies": {
-    "@carbon/themes": "^10.19.0",
+    "@carbon/themes": "^10.36.0",
     "@testing-library/jest-dom": "^5.13.0",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^13.1.9",
@@ -63,7 +63,7 @@
     "jest": "^24.9.0",
     "jest-puppeteer": "^4.4.0",
     "lint-staged": "^11.0.0",
-    "node-sass": "^4.14.1",
+    "node-sass": "npm:dart-sass@^1.25.0",
     "nodemon": "^2.0.7",
     "prettier": "^2.3.1",
     "puppeteer": "^5.3.1",
