@@ -52,7 +52,7 @@
   },
   "devDependencies": {
     "@carbon/themes": "^10.36.0",
-    "@testing-library/jest-dom": "^5.13.0",
+    "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^13.1.9",
     "carbon-components": "^10.37.0",
