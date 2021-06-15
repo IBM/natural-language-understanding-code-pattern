@@ -69,7 +69,7 @@
     "puppeteer": "^10.0.0",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
-    "react-json-view": "^1.19.1",
+    "react-json-view": "^1.21.3",
     "react-scripts": "4.0.3",
     "validator": "^13.1.17"
   },
