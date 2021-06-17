@@ -1,8 +1,8 @@
 <h1 align="center" style="border-bottom: none;">🔎 Natural Language Understanding Code Pattern </h1>
 <h3 align="center">Natural Language Understanding is a collection of APIs that offer text analysis through natural language processing. This set of APIs can analyze text to help you understand its concepts, entities, keywords, sentiment, and more. Additionally, you can create a custom model for some APIs to get specific results that are tailored to your domain.</h3>
 <p align="center">
-  <a href="http://travis-ci.org/watson-developer-cloud/natural-language-understanding-code-pattern">
-    <img alt="Travis" src="https://travis-ci.org/watson-developer-cloud/natural-language-understanding-code-pattern.svg?branch=master">
+  <a href="https://github.com/IBM/natural-language-understanding-code-pattern/actions/workflows/nodejs.yml/">
+    <img alt="GitHub Actions" src="https://github.com/IBM/natural-language-understanding-code-pattern/actions/workflows/nodejs.yml/badge.svg?branch=master">
   </a>
   <a href="#badge">
     <img alt="semantic-release" src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg">
