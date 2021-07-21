@@ -46,8 +46,7 @@
   },
   "lint-staged": {
     "./**/*.{js,scss,html,png}": [
-      "npm run build",
-      "git add"
+      "npm run build"
     ]
   },
   "devDependencies": {
