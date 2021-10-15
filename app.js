@@ -21,7 +21,7 @@ let client;
 try {
   client = new NaturalLanguageUnderstandingV1({
     // Remember to place the credentials in the .env file. Read the README.kd file!
-    version: '2020-01-01',
+    version: '2021-10-15',
   });
 } catch (err) {
   console.error('Error creating service client: ', err);
