@@ -70,7 +70,7 @@
     "react-json-view": "^1.21.3",
     "react-scripts": "4.0.3",
     "sass": "^1.43.3",
-    "validator": "^13.6.0"
+    "validator": "^13.7.0"
   },
   "prettier": {
     "trailingComma": "all",
