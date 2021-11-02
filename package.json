@@ -51,7 +51,7 @@
   },
   "devDependencies": {
     "@carbon/themes": "^10.46.0",
-    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/jest-dom": "^5.15.0",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
     "carbon-components": "^10.47.0",
@@ -70,7 +70,7 @@
     "react-json-view": "^1.21.3",
     "react-scripts": "4.0.3",
     "sass": "^1.43.3",
-    "validator": "^13.6.0"
+    "validator": "^13.7.0"
   },
   "prettier": {
     "trailingComma": "all",
