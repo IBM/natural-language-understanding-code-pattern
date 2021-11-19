@@ -50,14 +50,14 @@
     ]
   },
   "devDependencies": {
-    "@carbon/themes": "^10.46.0",
+    "@carbon/themes": "^10.47.0",
     "@testing-library/jest-dom": "^5.15.0",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
     "carbon-components": "^10.47.1",
     "carbon-components-react": "^7.48.1",
     "carbon-icons": "^7.0.7",
-    "concurrently": "^6.3.0",
+    "concurrently": "^6.4.0",
     "husky": "^7.0.4",
     "jest": "26.6.0",
     "jest-puppeteer": "^6.0.0",
