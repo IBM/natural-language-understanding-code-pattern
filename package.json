@@ -54,7 +54,7 @@
     "@testing-library/jest-dom": "^5.15.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
-    "carbon-components": "^10.48.0",
+    "carbon-components": "^10.49.0",
     "carbon-components-react": "^7.48.1",
     "carbon-icons": "^7.0.7",
     "concurrently": "^6.4.0",
