@@ -12,7 +12,7 @@
     "express-secure-only": "^0.2.1",
     "helmet": "^4.6.0",
     "ibm-watson": "^6.2.1",
-    "iso-639-1": "^2.1.10",
+    "iso-639-1": "^2.1.11",
     "morgan": "^1.10.0"
   },
   "scripts": {
