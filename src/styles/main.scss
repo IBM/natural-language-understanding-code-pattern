@@ -1,12 +1,4 @@
-// Set theme.
-@import '~@carbon/themes/scss/themes';
-$carbon--theme: $carbon--theme--g10;
-@include carbon--theme();
-
-// vendors
-@import '~carbon-components/scss/globals/scss/styles.scss';
-
-@import './index';
+@import '~carbon-components/scss/globals/scss/typography.scss';
 
 // components
 @import '../components/ProgressBar/progress-bar';

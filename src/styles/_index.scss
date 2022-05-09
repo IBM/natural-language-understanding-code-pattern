@@ -1,3 +1,11 @@
+// Set theme
+@import '~@carbon/themes/scss/themes';
+$carbon--theme: $carbon--theme--g10;
+@include carbon--theme();
+
+// All Carbon styles vendor
+@import '~carbon-components/scss/globals/scss/styles.scss';
+
 html {
   height: 100%;
 
