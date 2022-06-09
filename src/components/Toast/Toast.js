@@ -42,8 +42,8 @@ export const Toast = ({
   useEffect(() => {
     if (
       hideAfterFirstDisplay &&
-      typeof window !== undefined &&
-      typeof window.localStorage !== undefined &&
+      typeof window !== 'undefined' &&
+      typeof window.localStorage !== 'undefined' &&
       window.localStorage.getItem(NOTIFICATION_HAS_BEEN_SEEN) === 'true'
     ) {
       setHideToast(true);
@@ -60,8 +60,8 @@ export const Toast = ({
       onCloseButtonClick={() => {
         if (
           hideAfterFirstDisplay &&
-          typeof window !== undefined &&
-          typeof window.localStorage !== undefined
+          typeof window !== 'undefined' &&
+          typeof window.localStorage !== 'undefined'
         ) {
           window.localStorage.setItem(NOTIFICATION_HAS_BEEN_SEEN, 'true');
         }
