@@ -11,7 +11,7 @@ describe('app', () => {
   });
 
   it('should match a button with an "Analyze" text inside', async () => {
-    await expect(page).toMatchElement('.bx--btn--primary', {
+    await expect(page).toMatchElement('.cds--btn--primary', {
       text: 'Analyze',
     });
   });
