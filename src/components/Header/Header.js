@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Tile } from 'carbon-components-react';
-import { Button, Link } from 'carbon-components-react';
-import Api124 from '@carbon/icons-react/lib/API--1/24';
-import Document24 from '@carbon/icons-react/lib/document/24';
-import IbmCloud24 from '@carbon/icons-react/lib/ibm-cloud/24';
-import Launch16 from '@carbon/icons-react/lib/launch/16';
-import LogoGithub24 from '@carbon/icons-react/lib/logo--github/24';
+import { Tile, Button, Link } from '@carbon/react';
+import {
+  Api_1,
+  Document,
+  IbmCloud,
+  Launch,
+  LogoGithub,
+} from '@carbon/react/icons';
 
 export const Header = ({ description, links, title }) => (
   <Tile className="header">
@@ -37,7 +38,7 @@ Header.defaultProps = {
       href="https://cloud.ibm.com/apidocs/natural-language-understanding"
     >
       <p className="link-text">API reference</p>
-      <Api124 className="link-icon" />
+      <Api_1 className="link-icon"  size={24} />
     </Link>,
     <Link
       className="link"
@@ -47,7 +48,7 @@ Header.defaultProps = {
       href="https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-getting-started"
     >
       <p className="link-text">Documentation</p>
-      <Document24 className="link-icon" />
+      <Document className="link-icon" size={24} />
     </Link>,
     <Link
       className="link"
@@ -57,7 +58,7 @@ Header.defaultProps = {
       href="https://github.com/IBM/natural-language-understanding-code-pattern"
     >
       <p className="link-text">GitHub</p>
-      <LogoGithub24 className="link-icon" />
+      <LogoGithub className="link-icon" size={24} />
     </Link>,
     <Link
       className="link getting-started"
@@ -66,10 +67,10 @@ Header.defaultProps = {
       rel="noopener noreferrer"
       href="https://cloud.ibm.com/registration?target=%2Fcatalog%2Fservices%2Fnatural-language-understanding%3FhideTours%3Dtrue%26&cm_sp=WatsonPlatform-WatsonPlatform-_-OnPageNavCTA-IBMWatson_NaturalLanguageUnderstanding-_-Watson_Developer_Website"
     >
-      <Button className="link-button" kind="tertiary" renderIcon={Launch16}>
+      <Button className="link-button" kind="tertiary" renderIcon={(props) => <Launch size={16} {...props} />}>
         Start for free on IBM Cloud
       </Button>
-      <IbmCloud24 className="link-icon" />
+      <IbmCloud className="link-icon" size={24} />
     </Link>,
   ],
   title: '',

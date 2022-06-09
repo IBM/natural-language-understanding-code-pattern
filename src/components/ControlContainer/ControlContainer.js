@@ -7,7 +7,7 @@ import {
   Button,
   ContentSwitcher,
   Switch,
-} from 'carbon-components-react';
+} from '@carbon/react';
 import isURL from 'validator/lib/isURL';
 
 import defaultInputs from '../../data/input.json';
@@ -27,11 +27,11 @@ export const ControlContainer = ({ isAnalyzing, onAnalyzeCall }) => {
   const [url, setUrl] = useState(defaultInputs.url);
   const [text, setText] = useState(defaultInputs.text);
 
-  const onInputTypeChange = e => {
+  const onInputTypeChange = (e) => {
     setInputType(e.name);
   };
 
-  const onInputChange = e => {
+  const onInputChange = (e) => {
     if (inputType === 'url') {
       setUrl(e.target.value);
     } else {

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { CodeSnippet } from 'carbon-components-react';
+import { CodeSnippet } from '@carbon/react';
 
 export const SemanticRoles = props => {
   const renderResult = result => {

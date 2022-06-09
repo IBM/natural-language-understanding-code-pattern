@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-key */
 import React from 'react';
-import { DataTable } from 'carbon-components-react';
+import { DataTable } from '@carbon/react';
 
 const {
   TableContainer,
