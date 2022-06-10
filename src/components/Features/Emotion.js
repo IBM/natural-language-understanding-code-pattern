@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { DataTable } from '@carbon/react';
 
 import ProgressBar from '../ProgressBar';
-import { renderTable } from './utils';
+import DataTableWrapper from './DataTableWrapper';
 
 export const Emotion = ({ language, result }) => {
   if (!result || !result.document) {
@@ -44,11 +44,7 @@ export const Emotion = ({ language, result }) => {
 
   return (
     <div>
-      <DataTable
-        rows={rows}
-        headers={headers}
-        render={renderTable(renderCell)}
-      />
+      <DataTableWrapper rows={rows} headers={headers} renderCell={renderCell} />
     </div>
   );
 };
