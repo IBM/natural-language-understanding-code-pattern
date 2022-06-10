@@ -43,9 +43,7 @@ export const Emotion = ({ language, result }) => {
   };
 
   return (
-    <div>
-      <DataTableWrapper rows={rows} headers={headers} renderCell={renderCell} />
-    </div>
+    <DataTableWrapper rows={rows} headers={headers} renderCell={renderCell} />
   );
 };
 

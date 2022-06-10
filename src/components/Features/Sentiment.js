@@ -42,9 +42,7 @@ export const Sentiment = ({ language, result }) => {
   };
 
   return (
-    <div>
-      <DataTableWrapper rows={rows} headers={headers} renderCell={renderCell} />
-    </div>
+    <DataTableWrapper rows={rows} headers={headers} renderCell={renderCell} />
   );
 };
 
