@@ -2,9 +2,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { DataTable } from 'carbon-components-react';
-
-import { renderTable } from './utils';
+import { DataTable } from '@carbon/react';
+import DataTableWrapper from './DataTableWrapper';
 
 export const Syntax = ({ language, result }) => {
   if (!result || !result.tokens) {
@@ -35,7 +34,7 @@ export const Syntax = ({ language, result }) => {
   };
 
   return (
-    <DataTable rows={rows} headers={headers} render={renderTable(renderCell)} />
+    <DataTableWrapper rows={rows} headers={headers} renderCell={renderCell} />
   );
 };
 

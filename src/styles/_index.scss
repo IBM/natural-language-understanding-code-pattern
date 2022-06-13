@@ -1,8 +1,12 @@
+@use '@carbon/react/scss/theme' as *;
+
 html {
   height: 100%;
+  background: $background;
 
   body {
     height: 100%;
+    background: inherit;
 
     #__next {
       height: 100%;

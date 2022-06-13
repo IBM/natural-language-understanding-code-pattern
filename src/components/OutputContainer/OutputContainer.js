@@ -9,7 +9,7 @@ import {
   Dropdown,
   ContentSwitcher,
   Switch,
-} from 'carbon-components-react';
+} from '@carbon/react';
 import ReactJson from 'react-json-view';
 
 import {

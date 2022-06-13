@@ -2,10 +2,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { DataTable } from 'carbon-components-react';
+import { DataTable } from '@carbon/react';
 import ProgressBar from '../ProgressBar';
-
-import { renderTable } from './utils';
+import DataTableWrapper from './DataTableWrapper';
 
 export const Categories = ({ language, result }) => {
   if (!result || result.length === 0) {
@@ -38,7 +37,7 @@ export const Categories = ({ language, result }) => {
   };
 
   return (
-    <DataTable rows={rows} headers={headers} render={renderTable(renderCell)} />
+    <DataTableWrapper rows={rows} headers={headers} renderCell={renderCell} />
   );
 };
 
