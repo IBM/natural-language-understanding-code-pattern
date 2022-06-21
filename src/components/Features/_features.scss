@@ -1,4 +1,6 @@
-.bx--data-table-container {
+@use '@carbon/react/scss/spacing' as *;
+
+.cds--data-table-container {
   min-width: 10rem;
 }
 
