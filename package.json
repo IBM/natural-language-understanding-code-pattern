@@ -58,7 +58,7 @@
     "concurrently": "^7.2.2",
     "jest": "28.1.1",
     "jest-puppeteer": "^6.1.0",
-    "lint-staged": "^13.0.1",
+    "lint-staged": "^13.0.2",
     "nodemon": "^2.0.16",
     "prettier": "^2.7.1",
     "puppeteer": "^14.4.0",
