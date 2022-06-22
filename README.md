@@ -133,41 +133,6 @@ The recommended approach is to download the credentials file and place it in the
 
 1. View the application in a browser at `localhost:3000`
 
-## Deploying to IBM Cloud as a Cloud Foundry Application
-
-Click on the button below to deploy this demo to the IBM Cloud.
-
-[![Deploy to IBM Cloud](https://cloud.ibm.com/devops/setup/deploy/button.png)](https://cloud.ibm.com/devops/setup/deploy?repository=https://github.com/watson-developer-cloud/natural-language-understanding-code-pattern)
-
-### Manually
-
-1. Build the application
-
-   ```
-   npm run build
-   ```
-
-1. Login to IBM Cloud with the [IBM Cloud CLI](https://console.bluemix.net/docs/cli/index.html#overview)
-
-   ```
-   ibmcloud login
-   ```
-
-1. Target a Cloud Foundry organization and space.
-
-   ```
-   ibmcloud target --cf
-   ```
-
-1. Edit the _manifest.yml_ file. Change the **name** field to something unique. For example, `- name: my-app-name`.
-1. Deploy the application
-
-   ```
-   ibmcloud app push
-   ```
-
-1. View the application online at the app URL, for example: https://my-app-name.mybluemix.net
-
 ## Deploying to OpenShift
 
 This code pattern can be deployed to any OpenShift cluster or [Minishift](https://www.okd.io/minishift) running 3.2 or above.
