@@ -4,6 +4,7 @@ import sys
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.common.by import By
 
 # Do an action on the app's landing page
 options = Options()
@@ -27,7 +28,7 @@ try:
         raise Exception("Title should be " + expected_title)
 
     try:
-        driver.find_element_by_class_name('react-json-view')
+        driver.find_element(By.CLASS_NAME, 'react-json-view')
     except NoSuchElementException:
         pass
     else:
@@ -35,16 +36,16 @@ try:
         sys.exit("Experience Test Failed")
 
     # Find button and click it
-    analyze_button = driver.find_element_by_xpath("//button[contains(text(),'Analyze')]")
+    analyze_button = driver.find_element(By.XPATH, "//button[contains(text(),'Analyze')]")
     analyze_button.click()
 
     time.sleep(10)
 
     # Find and press the JSON tab
-    json_button = driver.find_element_by_xpath("//button/span[contains(text(),'JSON')]")
+    json_button = driver.find_element(By.XPATH, "//button/span[contains(text(),'JSON')]")
     json_button.click()
 
-    json_view = driver.find_element_by_class_name('react-json-view')
+    json_view = driver.find_element(By.CLASS_NAME, 'react-json-view')
     json_view_text = json_view.text
 
     # Simplistic check for something like this in the JSON:
