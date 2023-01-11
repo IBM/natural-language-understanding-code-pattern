@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { DataTable } from '@carbon/react';
+import { TableCell } from '@carbon/react';
 import ProgressBar from '../ProgressBar';
 import DataTableWrapper from './DataTableWrapper';
 
@@ -26,13 +26,13 @@ export const Concepts = ({ language, result }) => {
 
   const renderCell = cell => {
     return (
-      <DataTable.TableCell key={cell.id}>
+      <TableCell key={cell.id}>
         {cell.info.header === 'relevance' ? (
           <ProgressBar progress={cell.value} />
         ) : (
           cell.value
         )}
-      </DataTable.TableCell>
+      </TableCell>
     );
   };
 

@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { DataTable } from '@carbon/react';
+import { TableCell } from '@carbon/react';
 import DataTableWrapper from './DataTableWrapper';
 
 export const Syntax = ({ language, result }) => {
@@ -29,7 +29,7 @@ export const Syntax = ({ language, result }) => {
 
   const renderCell = cell => {
     return (
-      <DataTable.TableCell key={cell.id}>{cell.value}</DataTable.TableCell>
+      <TableCell key={cell.id}>{cell.value}</TableCell>
     );
   };
 

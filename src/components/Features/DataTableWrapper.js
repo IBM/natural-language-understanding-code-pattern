@@ -3,14 +3,14 @@ import React from 'react'
 import { DataTable } from '@carbon/react';
 import PropTypes from 'prop-types';
 
-const {
+import {
   TableContainer,
   Table,
   TableHead,
   TableRow,
   TableBody,
   TableHeader,
-} = DataTable;
+} from '@carbon/react';
 
 function DataTableWrapper({ rows, headers, renderCell, sortRow }) {
   return (
