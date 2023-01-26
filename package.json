@@ -4,7 +4,7 @@
   "proxy": "http://localhost:5000",
   "private": true,
   "dependencies": {
-    "@carbon/react": "^1.20.0",
+    "@carbon/react": "^1.21.0",
     "body-parser": "^1.20.1",
     "cross-env": "^7.0.3",
     "dotenv": "^16.0.3",
@@ -60,7 +60,7 @@
     "jest-puppeteer": "^6.2.0",
     "lint-staged": "^13.1.0",
     "nodemon": "^2.0.20",
-    "prettier": "^2.8.2",
+    "prettier": "^2.8.3",
     "puppeteer": "^18.0.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
