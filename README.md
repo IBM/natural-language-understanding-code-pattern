@@ -82,6 +82,7 @@ The recommended approach is to download the credentials file and place it in the
     ```
     NATURAL_LANGUAGE_UNDERSTANDING_IAM_APIKEY=X4rbi8vwZmKpXfowaS3GAsA7vdy17Qh7km5D6EzKLHL2
     NATURAL_LANGUAGE_UNDERSTANDING_URL=https://api.us-east.natural-language-understanding.watson.cloud.ibm.com/
+    NATURAL_LANGUAGE_UNDERSTANDING_AUTH_TYPE=iam
     ```
 
     - **CPD using username and password:** If your service instance is running in Cloud Pak for Data and you want to use `username` and `password` credentials, add the `NATURAL_LANGUAGE_UNDERSTANDING_USERNAME` and `NATURAL_LANGUAGE_UNDERSTANDING_PASSWORD` variables to the _.env_ file.
@@ -135,7 +136,7 @@ The recommended approach is to download the credentials file and place it in the
 
 ## Deploying to OpenShift
 
-This code pattern can be deployed to any OpenShift cluster or [Minishift](https://www.okd.io/minishift) running 3.2 or above.
+This code pattern can be deployed to any OpenShift cluster running 4.8 or above.
 
 ### Creating a project
 

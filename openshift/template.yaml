@@ -59,11 +59,8 @@ objects:
           ref: '${SOURCE_REPOSITORY_REF}'
         contextDir: '${CONTEXT_DIR}'
       strategy:
-        type: Source
-        sourceStrategy:
-          from:
-            kind: DockerImage
-            name: docker.io/centos/nodejs-12-centos7:latest
+        type: Docker
+        dockerStrategy:
           env:
             - name: NPM_MIRROR
               value: '${NPM_MIRROR}'
@@ -198,15 +195,15 @@ parameters:
     value: openshift
   - description:
       The exposed hostname that will route to the Node.js service, if left
-      blank a value will be defaulted.
+      commented a value will be defaulted.
     displayName: Application Hostname
     name: APPLICATION_DOMAIN
-    value: 'nlu-code-pattern'
+  #  value: 'nlu-code-pattern'
   - name: SOURCE_REPOSITORY_URL
     displayName: Git Repository URL
     description: The URL of the repository with your application source code.
     required: true
-    value: https://github.com/watson-developer-cloud/natural-language-understanding-code-pattern
+    value: https://github.com/IBM/natural-language-understanding-code-pattern
   - name: SOURCE_REPOSITORY_REF
     displayName: Git Reference
     description:
